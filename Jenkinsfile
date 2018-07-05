@@ -3,8 +3,8 @@ pipeline {
   stages {
     stage('buildTheBuilder') {
       steps {
-        sh 'echo "cmd: docker build -t build-img -f Dockerfile.build"'
         git 'https://github.com/angular/angular-seed'
+        sh 'echo "cmd: docker build -t build-img -f Dockerfile.build"'
       }
     }
     stage('createBuilderContainer') {
