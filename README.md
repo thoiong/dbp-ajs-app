@@ -1,7 +1,8 @@
 # dbp-ajs-app
 =====================
 
-Build https://github.com/angular/angular-seed using Docker Build Pattern.  
+This project build angular-seed application (https://github.com/angular/angular-seed) docker images using Docker Build Pattern.  
+
 Highlevel pipeline flow:
 - get https://github.com/angular/angular-seed
 - build the builder image
@@ -9,7 +10,7 @@ Highlevel pipeline flow:
 - extract /app for the service image
 - build service image
 
-For background info collected as part of my learning see "info" file.
+For background info collected as part of my learning/research see "info" file.
 
 -----------------
 | current status:|
