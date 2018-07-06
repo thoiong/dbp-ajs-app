@@ -1,0 +1,20 @@
+#base image
+FROM node:alpine as angular-builder
+
+ENV CHROME_BIN /usr/bin/chromium-browser
+#setup build workspace
+RUN mkdir -p /build-workspace
+
+WORKDIR /build-workspace
+
+#copy angular seed project.  Assume build layer clone angular seed repo
+COPY angular-seed /build-workspace
+
+RUN npm update
+RUN npm install 
+RUN npm audit fix
+
+#RUN npm run update-webdriver 
+
+#RUN npm test
+
