@@ -1,3 +1,5 @@
+Dockerfile ref: https://docs.docker.com/engine/reference/builder/
+
 -------------------------------------
 |Docker Build Pattern in a nutshell |
 -------------------------------------
@@ -8,10 +10,14 @@
 
 Process flow:
 
-    build docker image from Dockerfile.build - builder image cmd: docker build -t build-img -f Dockerfile.build
-    create container from build image in step 1 cmd: docker create --name build-cont build-img
-    extract artifacts needed for service image from the container in step 2 cmd: docker cp build-cont:/usr/local/gaia/target/mgs.war ./target/mgs.war
-    build docker image from Dockerfile - service image cmd: docker build .
+    build docker image from Dockerfile.build - builder image 
+        cmd: docker build -t build-img -f Dockerfile.build . --rm
+    create container from build image in step 1 
+        cmd: docker create --name build-cont build-img
+    extract artifacts needed for service image from the container in step 2 
+        cmd: docker cp build-cont:/build-workspace/app .
+    build docker image from Dockerfile - service image 
+        cmd: docker build -t angular-seed-app-img .
 
 see https://alexei-led.github.io/post/docker_builder_pattern/ for detail
 

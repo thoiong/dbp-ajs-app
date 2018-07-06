@@ -1,6 +1,11 @@
 pipeline {
   agent any
   stages {
+    stage('cleanupWorkspac') {
+      steps {
+        sh 'echo "remove angular-seed and app dir if exist"'
+      }
+    }
     stage('buildTheBuilder') {
       steps {
         git 'https://github.com/angular/angular-seed'
