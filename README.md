@@ -21,11 +21,11 @@ For background info collected as part of my learning/research see "info" file.
 ------------------------
 | Build docker images: |
 ------------------------
-run: sh build.sh
+run: bash build.sh
 
 ----------
 | to do: |
 ----------
-- move the logic in build.sh to blue ocean pipeline/jenkinsfile (https://jenkins.io/doc/book/blueocean/creating-pipelines/) 
 - add test to the build process
+- artifact publishing
 - exploring Docker Multi-Stage Builds
