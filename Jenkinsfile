@@ -3,7 +3,19 @@ pipeline {
   stages {
     stage('cleanupWorkspac') {
       steps {
-        sh 'echo "remove angular-seed and app dir if exist"'
+        sh '''
+             echo "removing angular-seed and app dir if exist"
+             if [ -d ${app} ]
+             then
+                 rm -rf ${app}
+             fi
+
+             if [ -d ${seed_proj_dir} ]
+             then
+                 rm -rf ${seed_proj_dir}
+             fi
+
+        '''
       }
     }
     stage('buildTheBuilder') {
