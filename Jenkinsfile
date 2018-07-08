@@ -3,40 +3,32 @@ pipeline {
   stages {
     stage('cleanupWorkspac') {
       steps {
-        sh '''
-             echo "removing angular-seed and app dir if exist"
-             if [ -d ${app} ]
-             then
-                 rm -rf ${app}
-             fi
-
-             if [ -d ${seed_proj_dir} ]
-             then
-                 rm -rf ${seed_proj_dir}
-             fi
-
-        '''
+        sh 'bash build.sh tidyUp '
       }
     }
-    stage('buildTheBuilder') {
+    stage('getAngularSeedCodes') {
       steps {
-        git 'https://github.com/angular/angular-seed'
-        sh 'echo "cmd: docker build -t build-img -f Dockerfile.build"'
+        sh 'bash build.sh getAngularSeedCodes'
+      }
+    }
+    stage('buildBuilder') {
+      steps {
+        sh 'bash build.sh buildBuilderImg'
       }
     }
     stage('createBuilderContainer') {
       steps {
-        sh 'echo "cmd: docker create --name build-cont build-img"'
+        sh 'bash build.sh buildBuilderImg'
       }
     }
     stage('collectRuntimeArtfacts') {
       steps {
-        sh 'echo "cmd: docker cp build-cont:<path/to/app> ./target/app"'
+        sh 'bash build.sh getAppFromBuilderImg'
       }
     }
     stage('buildServiceImg') {
       steps {
-        sh 'echo "cmd:docker build ."'
+        sh 'bash build.sh buildApp'
       }
     }
   }
